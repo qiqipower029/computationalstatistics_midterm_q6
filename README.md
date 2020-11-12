@@ -1,0 +1,1 @@
+# computationalstatistics_midterm_q6
