@@ -45,6 +45,7 @@ cor.ci.f = function(rho, n.obs){
 
 # ----------- Generate random correlation matrix within boundaries--------------# 
 gen.corr = function(para.list){
+  
   no.pois = para.list[[1]]
   no.bin = para.list[[2]]
   no.nonn = para.list[[3]]
@@ -69,7 +70,7 @@ gen.corr = function(para.list){
   while (stat == F) {
     rho = numeric(length(L))
     for (i in 1:length(L)) {
-      rho[i] = runif(1, max(L[i], -0.35), min(U[i],0.35))
+      rho[i] = runif(1, -0.25, 0.25)
     }
     cor.mat = matrix(0, nrow = 6, ncol = 6)
     cor.mat[upper.tri(cor.mat)] = rho
@@ -190,7 +191,7 @@ PoisBinNonNor.sim = function(n.obs, n.sim, cor.mat, para.list) {
 # ----------- Setting 1. CorA --------------# 
 # sample 100
 # sample 1000
-# sample 10000
+
 seed = 1
 set.seed(seed)
 para.list.1 = list(no.pois  = 2, no.bin = 2, 
@@ -209,28 +210,21 @@ write.csv(re1, "result_s1.csv")
 re2 = PoisBinNonNor.sim(1000, 1000, cor.mat.1, para.list.1)
 write.csv(re2, "result_s2.csv")
 
-re3 = PoisBinNonNor.sim(10000, 1000, cor.mat.1, para.list.1)
-write.csv(re3, "result_s3.csv")
-
-
 
 # ----------- Setting 2. Cor B --------------# 
 # sample 100
 # sample 1000
-# sample 10000
 
 # Simulation
 set.seed(100)
 cor.mat.2 = gen.corr(para.list.1)
 
-re4 = PoisBinNonNor.sim(100, 1000, cor.mat.2, para.list.1)
+re3 = PoisBinNonNor.sim(100, 1000, cor.mat.2, para.list.1)
+write.csv(re3, "result_s3.csv")
+
+re4 = PoisBinNonNor.sim(1000, 1000, cor.mat.2, para.list.1)
 write.csv(re4, "result_s4.csv")
 
-re5 = PoisBinNonNor.sim(1000, 1000, cor.mat.2, para.list.1)
-write.csv(re5, "result_s5.csv")
-
-re6 = PoisBinNonNor.sim(10000, 1000, cor.mat.2, para.list.1)
-write.csv(re6, "result_s6.csv")
 
 # ----------- Setting 3. Cor C --------------# 
 set.seed(2)
@@ -243,25 +237,21 @@ para.list.2 = list(no.pois  = 2, no.bin = 2,
 
 cor.mat.1 = gen.corr(para.list.2)
 
-re7 = PoisBinNonNor.sim(100, 1000, cor.mat.1, para.list.2)
-write.csv(re7, "result_s7.csv")
+re5 = PoisBinNonNor.sim(100, 1000, cor.mat.1, para.list.2)
+write.csv(re5, "result_s5.csv")
 
-re8 = PoisBinNonNor.sim(1000, 1000, cor.mat.1, para.list.2)
-write.csv(re8, "result_s8.csv")
+re6 = PoisBinNonNor.sim(1000, 1000, cor.mat.1, para.list.2)
+write.csv(re6, "result_s6.csv")
 
-re9 = PoisBinNonNor.sim(10000, 1000, cor.mat.1, para.list.2)
-write.csv(re9, "result_s9.csv")
 
 # ----------- Setting 4. Cor D --------------# 
 
 set.seed(3)
 cor.mat.2 = gen.corr(para.list.2)
 
-re10 = PoisBinNonNor.sim(100, 1000, cor.mat.2, para.list.2)
-write.csv(re10, "result_s10.csv")
+re7 = PoisBinNonNor.sim(100, 1000, cor.mat.2, para.list.2)
+write.csv(re7, "result_s7.csv")
 
-re11 = PoisBinNonNor.sim(1000, 1000, cor.mat.2, para.list.2)
-write.csv(re11, "result_s11.csv")
+re8 = PoisBinNonNor.sim(1000, 1000, cor.mat.2, para.list.2)
+write.csv(re8, "result_s8.csv")
 
-re12 = PoisBinNonNor.sim(10000, 1000, cor.mat.2, para.list.2)
-write.csv(re12, "result_s12.csv")
